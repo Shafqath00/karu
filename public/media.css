@@ -1,0 +1,8 @@
+@media screen and (max-width:991px) {
+    .nav-list{
+        display: none;
+    }
+    .ham{
+        display: flex;
+    }
+}
