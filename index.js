@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import { MailtrapClient } from "mailtrap"
+import path from "path";
+import { fileURLToPath } from 'url';
 import 'dotenv/config'
 
 const apps = express();
@@ -16,8 +18,11 @@ const client = new MailtrapClient({ token: TOKEN });
 apps.use(bodyParser.urlencoded({ extended: true }));
 apps.use(express.static("public"));
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 apps.get("/",(req,res)=>{
-    res.render("index.ejs")
+    res.sendFile(__dirname+"/files/index.html")
 })
 apps.post("/submit",(req,res)=>{
     const {name,mail,number,location,texts}= req.body;
